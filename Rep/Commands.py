@@ -1,13 +1,15 @@
-import os,re
+import os, re
 from log import default_logger
 
+# Command lib for agent to read
 Command_lib = """
 read_file(arg:<file_path>)
     Rule: return the code file content with line number start with
           argument need to be formatted as readfile(<file_path>) rather than readfile("<file_path>") 
+          
 """
 
-
+# object class Command containing all the commands agent needed to call
 class Command(object):
     def __init__(self):
         self.name = '1'
@@ -57,5 +59,3 @@ class Command(object):
     def environment_feedback(self):
         with open("temp_feedback.txt", "w") as file:
             file.write()
-
-
