@@ -2,7 +2,7 @@ from openai import OpenAI
 import os, yaml
 from AI_AGent.secret_key import my_sk
 from log import default_logger, get_logger
-import Commands
+import Commands, Prompt
 client = OpenAI(api_key=my_sk)
 with open("Prompt.yaml") as stream:
     try:
@@ -16,7 +16,7 @@ def chat_with_openai(prompt):
         messages=[
             {
                 "role": "system",
-                "content": system_prompt,
+                "content": Prompt.System_Prompt,
             },
             {
                 "role": "user",
@@ -39,9 +39,7 @@ def openai_file_assistant(file_path):
     response = chat_with_openai(prompt)
     return response
 
-
+file_path = Prompt.file_path
 # Example usage
-if __name__ == "__main__":
-    file_path = '/Users/Leo/Documents/AI_Agent/SWE-replicate/Rep/file_inter.py'
-    assistant_response = openai_file_assistant(file_path)
-    print(assistant_response)
+assistant_response = openai_file_assistant(file_path)
+print(assistant_response)
