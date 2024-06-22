@@ -14,11 +14,15 @@ def msg_record(message):
         file.write(f"{message} \n")
 
 
-def locate_command(conversation, i):
-    if contains_command(conversation[i]["content"], "command"):
+def locate_command(conversation, command):
+    if contains_command(conversation, command):
         with open("temp_cmd.txt", "w+") as file:
-            command_line = file.readline(i+1)
+            command_line = file.readline()
             command_line.strip(" ")
+    else:
+        print("No command found")
+        return
+
             
 
 
