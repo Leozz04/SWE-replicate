@@ -1,6 +1,6 @@
 import Commands
 
-file_path = '/Users/Leo/Documents/AI_Agent/SWE-replicate/Rep/file_inter.py'
+file_path = "/Users/Leo/Documents/AI_Agent/SWE-replicate/Rep/Commands.py"
 
 System_Prompt = f"""SETTING: You are an autonomous programmer SWE-Executor(Executor), and You have Full Access to the Operating System by using designed command..
                    You can use the following commands to help you navigate and edit files(In each command, "arg:" represent argument you can input as a parameter to use the command): {Commands.Command_lib}
