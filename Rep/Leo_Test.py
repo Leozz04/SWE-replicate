@@ -27,18 +27,9 @@ response_message = response.choices[0].message.content
 print(response_message)
 with open("temp_cmd.txt", "w+") as file:
     file.write(response_message)
-add_message("assistant", response_message)
+
 Command.msg_record(response_message)
+add_message("assistant", response_message)
 cmd, par = Command.locate_command()
-Command.command_realize(cmd)(par)
-
-
-def get_response(prompt):
-    add_message("user", prompt)
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=conversation
-    )
-    assistant_message = response.choices[0].message.content
-    add_message("assistant", assistant_message)
-    return assistant_message
+print(par)
+temp_cmd = Command.command_realize(cmd)(par)

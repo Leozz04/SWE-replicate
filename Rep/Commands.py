@@ -2,10 +2,9 @@ import os,re
 from log import default_logger
 
 Command_lib = """
-read_file(arg:<file_path>):
-    return the code file content with line number start with 
-locate_line(arg:<line_num>):
-    return the line located at line_num
+read_file(arg:<file_path>)
+    Rule: return the code file content with line number start with
+          argument need to be formatted as readfile(<file_path>) rather than readfile("<file_path>") 
 """
 
 
@@ -45,6 +44,7 @@ class Command(object):
                 if Command.contains_command(conversation[i], "command"):
                     temp_cmd = conversation[i + 1].split("(")[0]
                     parameter = str(re.findall(r"\((.*?)\)", conversation[i + 1])[0])
+                    parameter.strip()
                     return temp_cmd, parameter
 
     def contains_command(message, command):
