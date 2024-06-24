@@ -29,10 +29,17 @@ def get_record_response(prompt):
 conversation = [
     {"role": "system", "content": Prompt.System_Prompt},
 ]
+with open("msg_record.txt", "w+") as file:
+    file.write(" ")
 response_message1 = get_record_response(Prompt.Instance_Prompt)
 add_message("assistant", response_message1)
 cmd, par = Command.locate_command()
 temp_cmd = Command.command_realize(cmd)(par)
 response_message2 = get_record_response(temp_cmd)
-print(response_message2)
-
+add_message("assistant", response_message1)
+cmd, par = Command.locate_command()
+temp_cmd = Command.command_realize(cmd)(par)
+response_message3 = get_record_response(temp_cmd)
+add_message("assistant", response_message1)
+cmd, par = Command.locate_command()
+temp_cmd = Command.command_realize(cmd)(par)
