@@ -1,6 +1,6 @@
 import Commands
 
-file_path = "/Users/Leo/Documents/AI_Agent/SWE-replicate/Rep/Commands.py"
+file_path = "/Users/Leo/Documents/AI_Agent/SWE-replicate/Rep/playground.py"
 
 
 System_Prompt = f"""SETTING: You are an autonomous programmer SWE-Executor(Executor), and You have Full Access to the Operating System by using designed command.
@@ -10,11 +10,12 @@ System_Prompt = f"""SETTING: You are an autonomous programmer SWE-Executor(Execu
   Your output should always include _one_ <thought> and _one_ <function_call> field EXACTLY as in the following example:
   <thought>
   First I'll start by using ls to see what files are in the current directory. Then maybe we can look at some relevant files to see what they look like.
-
+  </thought>
   <function_call>
   ```cmd
   read_file(Mac/working_directory/Example.py)
   ```
+  </function_call>
   *Remember this is only an example!*
   You should only include a *SINGLE* command in the command section and then wait for a response from the shell before continuing with more discussion and commands.
   If you'd like to issue two commands at once, PLEASE DO NOT DO THAT! Please instead first submit just the first command, and then after receiving a response you'll be able to issue the second command.

@@ -1,24 +1,48 @@
-from __future__ import annotations
-
 import logging
+import pathlib
 
-from rich.logging import RichHandler
+class Log:
+    def __init__(self, file_name, logger_name=None, level=logging.INFO):
+        self.file_name = file_name
+        self.level = level
+        self.logger = logging.getLogger(logger_name)
+        self.logger.setLevel(self.level)
+        self.init_log()
 
-_SET_UP_LOGGERS = set()
+    def init_log(self):
+        handler = logging.FileHandler(self.file_name)
+        handler.setLevel(self.level)
+        formatter = logging.Formatter(
+            "[%(asctime)s - %(filename)s - %(name)s - %(levelname)s]: %(message)s"
+        )
+        handler.setFormatter(formatter)
+        self.logger.addHandler(handler)
+
+        stream_handler = logging.StreamHandler()
+        stream_handler.setLevel(self.level)
+        stream_handler.setFormatter(formatter)
+        # 添加处理器
+        self.logger.addHandler(stream_handler)
+
+    def info(self, msg):
+        self.logger.info(msg)
+
+    def debug(self, msg):
+        self.logger.debug(msg)
+
+    def warning(self, msg):
+        self.logger.warning(msg)
+
+    def error(self, msg):
+        self.logger.error(msg)
+
+    def critical(self, msg):
+        self.logger.critical(msg)
 
 
-def get_logger(name: str) -> logging.Logger:
-    logger = logging.getLogger(name)
-    if name in _SET_UP_LOGGERS:
-        # Already set up
-        return logger
-    handler = RichHandler(show_time=False, show_path=False)
-    handler.setLevel(logging.DEBUG)
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(handler)
-    logger.propagate = False
-    _SET_UP_LOGGERS.add(name)
-    return logger
+log_path = pathlib.Path(__file__).parent.joinpath("Info.log")
+log = Log(log_path)
 
 
-default_logger = get_logger("swe-agent")
+if __name__ == "__main__":
+    log.info("test log")
